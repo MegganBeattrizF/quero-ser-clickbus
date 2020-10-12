@@ -5,6 +5,7 @@ import com.clickbus.moviesdbtest.BuildConfig
 import com.clickbus.moviesdbtest.movies.callbacks.GenreListListener
 import com.clickbus.moviesdbtest.movies.callbacks.MovieListListener
 import com.clickbus.moviesdbtest.movies.models.GenreListContainer
+import com.clickbus.moviesdbtest.movies.models.Movie
 import com.clickbus.moviesdbtest.movies.models.MovieListPageResult
 import retrofit2.Call
 import retrofit2.Callback
@@ -25,7 +26,10 @@ object ApiCommunicationSingleton {
             api = retrofit.create(TmdbService::class.java)
         }
 
-    fun getPopularMovies(page: Int = 1) {
+    fun getPopularMovies(page: Int = 1,
+                         onSuccess: (movies: List<Movie>) -> Unit,
+                         onError: () -> Unit
+    ) {
         api.getPopularMovies(page = page)
             .enqueue(object : Callback<MovieListPageResult> {
                 override fun onResponse(
@@ -36,10 +40,12 @@ object ApiCommunicationSingleton {
                         val responseBody = response.body()
 
                         if (responseBody != null) {
-                            Log.d("Repository", "Movies: ${responseBody.movieList}")
+                            onSuccess.invoke(responseBody.movieList)
                         } else {
-                            Log.d("Repository", "Failed to get response")
+                            onError.invoke()
                         }
+                    } else {
+                        onError.invoke()
                     }
                 }
 
