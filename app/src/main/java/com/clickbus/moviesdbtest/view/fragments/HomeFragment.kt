@@ -81,6 +81,9 @@ class HomeFragment : Fragment(),MovieListListener {
             }))
         ApiCommunicationSingleton.loadMostPopularMoviesToday(this)
 
+
+
+
         return view
     }
 
@@ -93,7 +96,5 @@ class HomeFragment : Fragment(),MovieListListener {
     override fun onFailure(message: String?) {
         Toast.makeText(context, getString(R.string.error_fetch_movies), Toast.LENGTH_SHORT).show()
     }
-
-
 
 }

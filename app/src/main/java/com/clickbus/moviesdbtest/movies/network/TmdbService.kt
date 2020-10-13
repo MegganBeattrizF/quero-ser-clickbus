@@ -20,12 +20,21 @@ interface TmdbService {
 
     @GET("movie/{movie_id}/credits")
     fun getCredits(
+        @Path("movie_id") id: Int,
         @Query("api_key") apiKey: String = "3c5e3dd17b0d1aedb9eec27268a77e3d",
+
     ): Call<Credits>
 
+    @GET("movie/{id}")
+    fun movieDetail(
+        @Path("id") id: Int,
+        @Query("api_key") apiKey: String,
+        @Query("language") language: String
+    ): Call<MovieDetail>
 
     @GET("trending/movie/day")
-    fun trendingMovies(@Query("api_key") apiKey: String): Call<MovieListPageResult>
+    fun trendingMovies(@Query("api_key") apiKey: String
+    ): Call<MovieListPageResult>
 
     @GET("trending/movie/day")
     fun trendingMovies(
@@ -40,12 +49,6 @@ interface TmdbService {
         @Query("page") page: Int
     ): Call<MovieListPageResult>
 
-    @GET("movie/{id}")
-    fun movieDetail(
-        @Path("id") id: Int,
-        @Query("api_key") apiKey: String,
-        @Query("language") language: String
-    ): Call<MovieDetail>
 
     @GET("search/movie")
     fun searchMovies(

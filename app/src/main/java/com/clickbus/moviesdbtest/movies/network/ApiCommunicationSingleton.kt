@@ -1,8 +1,10 @@
 package com.clickbus.moviesdbtest.movies.network
 
 import com.clickbus.moviesdbtest.BuildConfig
+import com.clickbus.moviesdbtest.movies.callbacks.CreditsListener
 import com.clickbus.moviesdbtest.movies.callbacks.GenreListListener
 import com.clickbus.moviesdbtest.movies.callbacks.MovieListListener
+import com.clickbus.moviesdbtest.movies.models.Credits
 import com.clickbus.moviesdbtest.movies.models.GenreListContainer
 import com.clickbus.moviesdbtest.movies.models.MovieListPageResult
 import retrofit2.Call
@@ -58,5 +60,26 @@ object ApiCommunicationSingleton {
                     movieListListener.onFailure(t.message)
                 }
             })
+    }
+
+    fun loadCredits(movieCreditsListener: CreditsListener, movieId: Int ) {
+
+        tmdbService.getCredits(movieId,BuildConfig.API_KEY).enqueue(
+            object : Callback<Credits>{
+                override fun onResponse(call: Call<Credits>, response: Response<Credits>) {
+                    response.body()?.crewList?.let {
+                        movieCreditsListener.onSuccess(it)
+                        return
+                    }
+                    movieCreditsListener.onFailure()
+                }
+
+                override fun onFailure(call: Call<Credits>, t: Throwable) {
+
+                }
+
+            }
+        )
+
     }
 }
