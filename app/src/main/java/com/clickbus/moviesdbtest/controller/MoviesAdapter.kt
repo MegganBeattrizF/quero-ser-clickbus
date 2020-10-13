@@ -45,7 +45,7 @@ class MoviesAdapter(
 
         fun bind(movie: Movie) {
 
-            ratingBar.rating = (movie.voteCount/2).toFloat()
+            ratingBar.rating = (movie.voteAverage/2).toFloat()
             vote_average.text = movie.voteAverage.toString()
             vote.text = movie.voteCount.toString()
             title.text = movie.originalTitle
