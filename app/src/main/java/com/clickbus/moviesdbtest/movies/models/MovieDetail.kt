@@ -15,9 +15,12 @@ data class MovieDetail(
     @SerializedName("popularity") val popularity: Double,
     @SerializedName("poster_path") val posterPath: String,
     @SerializedName("production_companies") val companyList: List<ProductionCompany>,
+    @SerializedName("revenue") val revenue: Int,
+    @SerializedName("runtime") val runtime: Int,
     @SerializedName("release_date") val releaseDate: String,
     @SerializedName("title") val title: String,
     @SerializedName("tagline") val tagline: String,
     @SerializedName("vote_average") val averageScore: Double,
     @SerializedName("vote_count") val voteCount: Int
+
 )

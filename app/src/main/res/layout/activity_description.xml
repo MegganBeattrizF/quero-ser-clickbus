@@ -13,10 +13,9 @@
 
         <ImageView
             android:id="@+id/imageView_img_desciption_value"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="350dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/capa_filme"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -24,7 +23,7 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView"
             android:layout_width="0dp"
-            android:layout_height="250dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             app:cardBackgroundColor="@color/colorPrimary"
@@ -52,7 +51,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/textView-media_votes_value"
+                    android:id="@+id/textView_media_votes_value"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
@@ -74,14 +73,14 @@
                     android:numStars="5"
                     android:stepSize="0.1"
                     android:theme="@style/RatingBar"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView-media_votes_value"
-                    app:layout_constraintStart_toEndOf="@+id/textView-media_votes_value"
-                    app:layout_constraintTop_toTopOf="@+id/textView-media_votes_value" />
+                    app:layout_constraintBottom_toBottomOf="@+id/textView_media_votes_value"
+                    app:layout_constraintStart_toEndOf="@+id/textView_media_votes_value"
+                    app:layout_constraintTop_toTopOf="@+id/textView_media_votes_value" />
 
                 <TextView
                     android:id="@+id/textView_description_text"
                     android:layout_width="0dp"
-                    android:layout_height="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="16dp"
                     android:layout_marginBottom="16dp"
@@ -90,8 +89,8 @@
                     android:textColor="@color/colorGray"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/textView-media_votes_value"
-                    app:layout_constraintTop_toBottomOf="@+id/textView-media_votes_value" />
+                    app:layout_constraintStart_toStartOf="@+id/textView_media_votes_value"
+                    app:layout_constraintTop_toBottomOf="@+id/textView_media_votes_value" />
 
                 <TextView
                     android:id="@+id/textView7"
@@ -102,9 +101,9 @@
                     android:fontFamily="@font/roboto"
                     android:text="Duração:"
                     android:textColor="@color/colorGray"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView-media_votes_value"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView_media_votes_value"
                     app:layout_constraintEnd_toStartOf="@+id/textView_time_duration_value"
-                    app:layout_constraintTop_toTopOf="@+id/textView-media_votes_value" />
+                    app:layout_constraintTop_toTopOf="@+id/textView_media_votes_value" />
 
                 <TextView
                     android:id="@+id/textView_time_duration_value"
@@ -180,7 +179,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerview_atores"
+                    android:id="@+id/recyclerview_actors"
                     android:layout_width="0dp"
                     android:layout_height="70dp"
                     android:layout_marginStart="16dp"

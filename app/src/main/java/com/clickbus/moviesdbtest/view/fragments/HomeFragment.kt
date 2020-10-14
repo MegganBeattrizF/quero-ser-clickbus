@@ -56,11 +56,7 @@ class HomeFragment : Fragment(),MovieListListener {
                     intent.putExtra("title",m.title)
                     intent.putExtra("img",m.posterPath)
                     intent.putExtra("release_information",m.releaseDate)
-                    //intent.putExtra("director",creditsList.)
-                    //intent.putExtra("actor",detail.)
-//                    intent.putExtra("time",m.posterPath)
-//                    intent.putExtra("budget",m.)
-//                    intent.putExtra("ticket",m.posterPath)
+                    intent.putExtra("rating",m.voteAverage)
                     startActivity(intent)
 
                 }

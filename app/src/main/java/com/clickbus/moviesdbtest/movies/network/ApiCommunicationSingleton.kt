@@ -1,11 +1,10 @@
 package com.clickbus.moviesdbtest.movies.network
 
 import com.clickbus.moviesdbtest.BuildConfig
-import com.clickbus.moviesdbtest.movies.callbacks.CreditsListener
-import com.clickbus.moviesdbtest.movies.callbacks.GenreListListener
-import com.clickbus.moviesdbtest.movies.callbacks.MovieListListener
+import com.clickbus.moviesdbtest.movies.callbacks.*
 import com.clickbus.moviesdbtest.movies.models.Credits
 import com.clickbus.moviesdbtest.movies.models.GenreListContainer
+import com.clickbus.moviesdbtest.movies.models.MovieDetail
 import com.clickbus.moviesdbtest.movies.models.MovieListPageResult
 import retrofit2.Call
 import retrofit2.Callback
@@ -62,20 +61,56 @@ object ApiCommunicationSingleton {
             })
     }
 
-    fun loadCredits(movieCreditsListener: CreditsListener, movieId: Int ) {
+    fun loadCrew(movieCrewListener: CrewListener, movieId: Int ) {
 
         tmdbService.getCredits(movieId,BuildConfig.API_KEY).enqueue(
             object : Callback<Credits>{
                 override fun onResponse(call: Call<Credits>, response: Response<Credits>) {
                     response.body()?.crewList?.let {
-                        movieCreditsListener.onSuccess(it)
+                        movieCrewListener.onSuccess(it)
                         return
                     }
-                    movieCreditsListener.onFailure()
+                    movieCrewListener.onFailure()
                 }
 
                 override fun onFailure(call: Call<Credits>, t: Throwable) {
 
+                }
+
+            }
+        )
+
+    }
+    fun loadCast(movieCastListener: CastListener, movieId: Int){
+        tmdbService.getCredits(movieId,BuildConfig.API_KEY).enqueue(
+            object : Callback<Credits>{
+                override fun onResponse(call: Call<Credits>, response: Response<Credits>) {
+                    response.body()?.castList?.let {
+                        movieCastListener.onSucessCast(it)
+                        return
+                    }
+                }
+
+                override fun onFailure(call: Call<Credits>, t: Throwable) {
+                    movieCastListener.onFailureCast()
+                }
+
+            }
+        )
+    }
+
+    fun loadDetails(movieDetailListener: DetailListener, movieId: Int){
+        tmdbService.movieDetail(movieId,BuildConfig.API_KEY,"pt-BR").enqueue(
+            object : Callback<MovieDetail>{
+                override fun onResponse(call: Call<MovieDetail>, response: Response<MovieDetail>) {
+                    response.body()?.let {
+                        movieDetailListener.onSuccessDetail(it)
+                        return
+                    }
+                }
+
+                override fun onFailure(call: Call<MovieDetail>, t: Throwable) {
+                    movieDetailListener.onFailureDetail()
                 }
 
             }
