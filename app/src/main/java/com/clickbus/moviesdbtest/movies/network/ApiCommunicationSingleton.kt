@@ -22,8 +22,9 @@ object ApiCommunicationSingleton {
     }
     private val tmdbService by lazy { retrofit.create(TmdbService::class.java) }
 
-    fun loadGenres(genreListListener: GenreListListener) {
-        tmdbService.genres(BuildConfig.API_KEY).enqueue(object : Callback<GenreListContainer> {
+    fun loadGenresWithLanguage(genreListListener: GenreListListener) {
+        tmdbService.genresWithLanguage(BuildConfig.API_KEY,"pt-BR").enqueue(
+            object : Callback<GenreListContainer> {
             override fun onResponse(
                 call: Call<GenreListContainer>,
                 response: Response<GenreListContainer>
